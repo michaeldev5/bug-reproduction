@@ -1,0 +1,10 @@
+{
+  "version": 0,
+  "descriptorPath": ".papi/descriptors",
+  "entries": {
+    "darwinia": {
+      "wsUrl": "wss://koi-rpc.darwinia.network",
+      "metadata": ".papi/metadata/darwinia.scale"
+    }
+  }
+}
