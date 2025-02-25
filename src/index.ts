@@ -12,11 +12,11 @@ const start = async () => {
     "7LgutW4uapAUb9XtHjsRmemvWmkyfukPSw1Sr5LwqqUGTKjf";
   const addr = FixedSizeBinary.fromAccountId32<32>(addressSS58).asHex();
 
-  const tx = await client
+  const nonce = await client
     .getTypedApi(hydration)
     .apis.AccountNonceApi.account_nonce(addr);
 
-  console.log(tx);
+  console.log(nonce);
 };
 
 start();
