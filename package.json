@@ -1,26 +1,32 @@
 {
-  "name": "darwinia-bug-reproduction",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "bug-reproduction",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "rimraf ./build && tsc",
-    "start": "pnpm build && node build/index.js"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@polkadot-api/descriptors": "file:.papi/descriptors",
-    "polkadot-api": "^1.6.2"
+    "polkadot-api": "^1.10.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@polkadot-labs/hdkd": "^0.0.8",
-    "@polkadot-labs/hdkd-helpers": "^0.0.8",
-    "@types/node": "^20.8.2",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.6.3"
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.3.1"
   },
-  "packageManager": "pnpm@9.12.1"
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }
