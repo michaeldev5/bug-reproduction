@@ -1,0 +1,12 @@
+{
+  "version": 0,
+  "descriptorPath": ".papi/descriptors",
+  "entries": {
+    "moonbeam": {
+      "wsUrl": "wss://moonbeam.ibp.network",
+      "metadata": ".papi/metadata/moonbeam.scale",
+      "genesis": "0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d",
+      "codeHash": "0x802c6b285502245d97dc73bdb164c128b9c7794637c67a3f23a105327d5566d2"
+    }
+  }
+}
