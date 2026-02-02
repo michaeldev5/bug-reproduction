@@ -13,7 +13,7 @@
     "@polkadot-api/descriptors": "file:.papi/descriptors",
     "@polkadot-labs/hdkd": "^0.0.20",
     "@polkadot-labs/hdkd-helpers": "^0.0.20",
-    "polkadot-api": "^1.17.1",
+    "polkadot-api": "^1.20.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

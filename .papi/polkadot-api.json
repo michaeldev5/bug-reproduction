@@ -7,6 +7,30 @@
       "metadata": ".papi/metadata/moonbeam.scale",
       "genesis": "0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d",
       "codeHash": "0x802c6b285502245d97dc73bdb164c128b9c7794637c67a3f23a105327d5566d2"
+    },
+    "ah": {
+      "wsUrl": "wss://sys.ibp.network/asset-hub-polkadot",
+      "metadata": ".papi/metadata/ah.scale",
+      "genesis": "0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
+      "codeHash": "0x8cada8f706ffc7c9bd0c31985ec4f34520914778edefaa94b624bc6adea48a1c"
+    },
+    "unique": {
+      "wsUrl": "wss://unique.ibp.network",
+      "metadata": ".papi/metadata/unique.scale",
+      "genesis": "0x84322d9cddbf35088f1e54e9a85c967a41a56a4f43445768125e61af166c7d31",
+      "codeHash": "0x95ccac96a3b03e613af177da3e8d2e0554b107afc651f1d3a3860f6e1dec7dfb"
+    },
+    "penpal": {
+      "wsUrl": "wss://westend-penpal-rpc.polkadot.io",
+      "metadata": ".papi/metadata/penpal.scale",
+      "genesis": "0xafb18a620de2f0a9bf9c56cf8c8b05cacc6c608754959f3020e4fc90f9ae0c9f",
+      "codeHash": "0x7301a28882cca10f83db6fdc5c95b81909a7f6c1ab22318924d733a88b68a0c0"
+    },
+    "peopleWestend": {
+      "wsUrl": "wss://westend-people-rpc.polkadot.io",
+      "metadata": ".papi/metadata/peopleWestend.scale",
+      "genesis": "0x1eb6fb0ba5187434de017a70cb84d4f47142df1d571d0ef9e7e1407f2b80b93c",
+      "codeHash": "0x9437630f395ebe06615b0d09dabb5f7941d45e98c9f168b2eebe8f878a349c19"
     }
   }
 }
