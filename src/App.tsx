@@ -25,8 +25,6 @@ function App() {
       provider: new WsProvider(WS_URL),
     });
 
-    const hex =
-      "0x1f0d04010100c91f04040100000700e8764817010401000104040d0102040001010090ae4c88038836d2c4baec14f2e96ed1efd2315497b79877c1680f992b98d17600";
     const tx = api.tx(hex);
     console.log(tx);
   };
