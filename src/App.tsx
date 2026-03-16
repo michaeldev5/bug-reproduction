@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <h1>PAPI reproduction</h1>
+      <h1>PJS reproduction</h1>
       <div className="card">
         <button onClick={onClickPjs}>Click me PJS</button>
       </div>
