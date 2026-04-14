@@ -1,18 +1,19 @@
+import { createWsClient } from "polkadot-api/ws";
 import "./App.css";
-import { DedotClient, WsProvider as DedotWsProvider } from "dedot";
 
 const WS_URL = "wss://acala-rpc-0.aca-api.network";
 
 function App() {
-  const onClickDedot = async () => {
-    await DedotClient.new(new DedotWsProvider(WS_URL));
+  const onClickPapi = async () => {
+    const client = createWsClient(WS_URL);
+    console.log(client);
   };
 
   return (
     <>
       <h1>PAPI reproduction</h1>
       <div className="card">
-        <button onClick={onClickDedot}>Click me DEDOT</button>
+        <button onClick={onClickPapi}>Click me</button>
       </div>
     </>
   );
