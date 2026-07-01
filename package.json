@@ -1,0 +1,13 @@
+{
+  "name": "papi-foreignassets-innerdecoder-repro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal reproduction: 'TypeError: innerDecoder is not a function' when decoding ForeignAssets storage on Westend Asset Hub with polkadot-api 2.x",
+  "scripts": {
+    "start": "node repro.mjs"
+  },
+  "dependencies": {
+    "polkadot-api": "2.1.7"
+  }
+}
