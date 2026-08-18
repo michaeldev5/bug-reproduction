@@ -1,34 +1,12 @@
 {
-  "name": "bug-reproduction",
+  "name": "jamton-papi-runtime-call-reproduction",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "start": "node index.mjs"
   },
   "dependencies": {
-    "@polkadot-api/descriptors": "file:.papi/descriptors",
-    "@polkadot-labs/hdkd": "^0.0.20",
-    "@polkadot-labs/hdkd-helpers": "^0.0.20",
-    "polkadot-api": "^1.20.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "polkadot-api": "2.2.2"
   },
-  "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^9.32.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
-    "typescript": "~5.9.2",
-    "typescript-eslint": "^8.38.0",
-    "vite": "^7.0.6"
-  },
-  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
+  "packageManager": "pnpm@11.18.0"
 }
