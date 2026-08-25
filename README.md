@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# eslint-plugin-tsdoc: undeclared `eslint` type dependency
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Minimal reproduction for [microsoft/tsdoc](https://github.com/microsoft/tsdoc).
 
-Currently, two official plugins are available:
+`eslint-plugin-tsdoc`'s published `lib/index.d.ts` does:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```ts
+import type * as eslint from 'eslint';
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+but the package declares no `dependency` or `peerDependency` on `eslint` — only a
+`devDependency`. Under pnpm's non-hoisted layout, `eslint` is therefore never linked
+into the plugin's private `node_modules`, so TypeScript's upward walk continues past
+the plugin and binds `'eslint'` to whatever `@types/eslint` is reachable in the tree.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Reproduce
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+pnpm install
+./node_modules/.bin/tsc --noEmit
 ```
+
+Expected: exit 0. Actual: exit 2 —
+
+```
+eslint.config.js(6,14): error TS2322: Type 'IPlugin' is not assignable to type 'Plugin'.
+  Types of property 'rules' are incompatible.
+    Type '{ [x: string]: RuleModule; }' is not assignable to type 'Record<string, RuleDefinition<RuleDefinitionTypeOptions>>'.
+```
+
+Confirm the misresolution with:
+
+```bash
+./node_modules/.bin/tsc --noEmit --traceResolution | grep "Module name 'eslint' was successfully resolved"
+```
+
+which reports `@types/eslint@9.6.1` rather than the installed `eslint@10.8.0`.
+
+## Why `@types/eslint-scope` is here
+
+It is the only reason `@types/eslint` enters the tree, and it enters transitively —
+`@types/eslint-scope` → `@types/eslint`. In a real project this typically arrives via
+`webpack`. Nothing depends on `@types/eslint` directly. Remove `@types/eslint-scope`
+from `package.json` and the repro passes.
+
+## Does not reproduce under npm
+
+A flat `npm install` hoists the real `eslint` to the top level, where its bundled
+types win the lookup. The bug needs an isolated layout (pnpm, Yarn PnP).
+
+## Workaround (consumer side)
+
+Declaring the missing peer is sufficient. Add:
+
+```yaml
+# pnpm-workspace.yaml
+packageExtensions:
+  eslint-plugin-tsdoc:
+    peerDependencies:
+      eslint: "*"
+```
+
+then `pnpm install` and re-run `tsc` — exit 0. pnpm now links the consumer's ESLint
+into the plugin's private `node_modules`, and resolution finds the real package.
+
+## Fix (package side)
+
+Add `"peerDependencies": { "eslint": ">=7" }` to `eslint-plugin-tsdoc`'s own
+`package.json`.
